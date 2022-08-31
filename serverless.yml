@@ -1,0 +1,40 @@
+org: rferons
+app: we-the-dancers
+service: we-the-dancers-api
+useDotenv: true
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  profile: 'we-the-dancers'
+  runtime: nodejs16.x
+  environment:
+    APP_URL: ${env:APP_URL}
+    SPOTIFY_CLIENT_ID: ${env:SPOTIFY_CLIENT_ID}
+    SPOTIFY_CLIENT_SECRET: ${env:SPOTIFY_CLIENT_SECRET}
+    SPOTIFY_REDIRECT_URI: ${env:SPOTIFY_REDIRECT_URI}
+
+functions:
+  spotifyLogin:
+    handler: handlers/spotify/login.index
+    httpApi:
+      payload: '1.0'
+    events:
+      - httpApi:
+          path: /spotify/login
+          method: get
+  spotifyCallback:
+    handler: handlers/spotify/callback.index
+    events:
+      - httpApi:
+          path: /spotify/callback
+          method: get
+  spotifyRefreshToken:
+    handler: handlers/spotify/refreshToken.index
+    events:
+      - httpApi:
+          path: /spotify/refresh_token
+          method: get
+plugins:
+  - serverless-offline

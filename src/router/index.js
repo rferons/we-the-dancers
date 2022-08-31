@@ -3,10 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../pages/HomePage'
 import MainPage from '../pages/MainPage'
 import StartPage from '../pages/StartPage'
+import SetupPage from '../pages/SetupPage'
 
 const routes = [
   { path: '/', component: HomePage },
   { path: '/start', component: StartPage },
+  { path: '/setup', component: SetupPage },
   { path: '/:code', component: MainPage },
 ]
 
