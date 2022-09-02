@@ -1,0 +1,45 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-wethedancers-dev-215924-authRole",
+      "UnauthRoleArn": "arn:aws:iam::616905359555:role/amplify-wethedancers-dev-215924-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::616905359555:role/amplify-wethedancers-dev-215924-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-wethedancers-dev-215924-deployment",
+      "UnauthRoleName": "amplify-wethedancers-dev-215924-unauthRole",
+      "StackName": "amplify-wethedancers-dev-215924",
+      "StackId": "arn:aws:cloudformation:us-east-1:616905359555:stack/amplify-wethedancers-dev-215924/b4e3da80-2999-11ed-b7ed-12e1040dec69",
+      "AmplifyAppId": "d3pkd01z38gpom"
+    },
+    "categories": {
+      "function": {
+        "spotifyCallback": {
+          "deploymentBucketName": "amplify-wethedancers-dev-215924-deployment",
+          "s3Key": "amplify-builds/spotifyCallback-394e7849694c5363764b-build.zip",
+          "secretsPathAmplifyAppId": "d3pkd01z38gpom",
+          "spotifyClientId": "2a33822471df48c1b5939db7f56ea58b",
+          "spotifyRedirectUri": "https://7ny3hwze4m.execute-api.us-east-1.amazonaws.com/dev/spotify/callback",
+          "appUrl": "http://localhost:8080"
+        },
+        "spotifyLogin": {
+          "deploymentBucketName": "amplify-wethedancers-dev-215924-deployment",
+          "s3Key": "amplify-builds/spotifyLogin-526a5077494c444d704e-build.zip",
+          "spotifyClientId": "2a33822471df48c1b5939db7f56ea58b",
+          "spotifyRedirectUri": "http://localhost:3000/spotify/callback",
+          "secretsPathAmplifyAppId": "d3pkd01z38gpom"
+        },
+        "spotifyRefreshToken": {
+          "deploymentBucketName": "amplify-wethedancers-dev-215924-deployment",
+          "s3Key": "amplify-builds/spotifyRefreshToken-314a4b3072684456694f-build.zip",
+          "spotifyClientId": "2a33822471df48c1b5939db7f56ea58b",
+          "spotifyRedirectUri": "https://7ny3hwze4m.execute-api.us-east-1.amazonaws.com/dev/spotify/callback",
+          "secretsPathAmplifyAppId": "d3pkd01z38gpom"
+        },
+        "wethedancersWeTheDancersUtilsLayer": {
+          "deploymentBucketName": "amplify-wethedancers-dev-215924-deployment",
+          "s3Key": "amplify-builds/wethedancersWeTheDancersUtilsLayer-LambdaLayerVersion8928ff22-build.zip"
+        }
+      }
+    }
+  }
+}

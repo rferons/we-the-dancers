@@ -1,11 +1,26 @@
-const RequestUtils = require('../../utils/RequestUtils')
+/*
+Use the following code to retrieve configured secrets from SSM:
 
-const prepareResponse = (error) => {
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["SPOTIFY_CLIENT_SECRET"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
+const RequestUtils = require('/opt/RequestUtils')
+const aws = require('aws-sdk');
+
+const prepareResponse = (error, token) => {
   let url = process.env.APP_URL
   if (error) {
     url += '/start?error=' + error
   } else {
-    url += '/setup'
+    url += '/setup?provider=spotify&token=' + token
   }
 
   console.log('redirect url', url)
@@ -18,11 +33,22 @@ const prepareResponse = (error) => {
   }
 }
 
-module.exports.index = async (event) => {
+exports.handler = async (event) => {
+
+  console.log(event)
+
+  const { Parameter: SpotifyClientSecret } = await (new aws.SSM())
+    .getParameter({
+      Name: process.env.SPOTIFY_CLIENT_SECRET,
+      WithDecryption: true,
+    })
+    .promise();
+
+  console.log({ SpotifyClientSecret });
 
   const code = event.queryStringParameters.code;
   const state = event.queryStringParameters.state || null;
-  const stateCookie = event.cookies.find(c => c === `spotify_auth_state=${state}`);
+  const stateCookie = event.multiValueHeaders.Cookie.find(c => c === `spotify_auth_state=${state}`);
 
   if (!stateCookie) {
     return prepareResponse('missing_state');
@@ -34,7 +60,7 @@ module.exports.index = async (event) => {
   }
 
   const clientId = process.env.SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+  const clientSecret = SpotifyClientSecret.Value;
 
   try {
     console.log({ code });
@@ -64,6 +90,8 @@ module.exports.index = async (event) => {
     const expires_in = response.body.expires_in;
     const refresh_token = response.body.refresh_token;
 
+    console.log({ access_token, expires_in, refresh_token });
+
     return prepareResponse();
 
   } catch (e) {
@@ -71,6 +99,3 @@ module.exports.index = async (event) => {
     return prepareResponse('invalid_token');
   }
 }
-
-
-

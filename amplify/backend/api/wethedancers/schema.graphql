@@ -1,0 +1,18 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+
+type Dance @model @auth(rules: [{ allow: public }]) {
+  code: ID!
+  accessToken: String!
+  requestToken: String!
+  tokenExpiresAt: String!
+  requests: [Request] @hasMany
+}
+
+type Request @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  songId: String!
+  upVoteCount: Int!
+  downVoteCount: Int!
+  dance: Dance @belongsTo
+}

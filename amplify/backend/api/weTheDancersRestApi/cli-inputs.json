@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "paths": {
+    "/spotify/login": {
+      "name": "/spotify/login",
+      "lambdaFunction": "spotifyLogin",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/spotify/callback": {
+      "name": "/spotify/callback",
+      "lambdaFunction": "spotifyCallback",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/spotify/refreshToken": {
+      "name": "/spotify/refreshToken",
+      "lambdaFunction": "spotifyRefreshToken",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 const crypto = require("crypto");
-module.exports.index = async () => {
+
+exports.handler = async () => {
   const state = crypto.randomBytes(8).toString('hex')
 
   const qs = new URLSearchParams();
@@ -18,4 +19,4 @@ module.exports.index = async () => {
       'Set-Cookie': `spotify_auth_state=${state}`
     }
   };
-}
+};

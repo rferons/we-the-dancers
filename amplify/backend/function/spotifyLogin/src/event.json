@@ -1,0 +1,8 @@
+{
+  "httpMethod": "GET",
+  "path": "/spotify/login",
+  "queryStringParameters": {},
+  "headers": {
+    "Content-Type": "application/json"
+  }
+}

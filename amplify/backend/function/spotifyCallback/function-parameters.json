@@ -1,0 +1,20 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "spotifyClientId",
+      "environmentVariableName": "SPOTIFY_CLIENT_ID"
+    },
+    {
+      "cloudFormationParameterName": "spotifyRedirectUri",
+      "environmentVariableName": "SPOTIFY_REDIRECT_URI"
+    },
+    {
+      "cloudFormationParameterName": "appUrl",
+      "environmentVariableName": "APP_URL"
+    }
+  ],
+  "secretNames": [
+    "SPOTIFY_CLIENT_SECRET"
+  ]
+}

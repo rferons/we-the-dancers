@@ -1,9 +1,32 @@
-const RequestUtils = require('../../utils/RequestUtils');
+/*
+Use the following code to retrieve configured secrets from SSM:
 
-module.exports.index = async (event) => {
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["SPOTIFY_CLIENT_SECRET"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
+const RequestUtils = require('/opt/RequestUtils');
+const aws = require('aws-sdk');
+
+exports.handler = async (event) => {
+
+  const { Parameter: SpotifyClientSecret } = await (new aws.SSM())
+    .getParameter({
+      Name: process.env.SPOTIFY_CLIENT_SECRET,
+      WithDecryption: true,
+    })
+    .promise();
+
   const danceCode = event.queryStringParameters.code;
   const clientId = process.env.SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+  const clientSecret = SpotifyClientSecret.Value;
 
   // get the refresh token from the database
   const refresh_token = 'abc123';
@@ -34,6 +57,8 @@ module.exports.index = async (event) => {
     const expires_in = response.body.expires_in;
     const refresh_token = response.body.refresh_token;
 
+    console.log({ access_token, expires_in, refresh_token });
+
     return {
       statusCode: 200
     }
@@ -43,5 +68,4 @@ module.exports.index = async (event) => {
       statusMessage: err
     }
   }
-
-}
+};
