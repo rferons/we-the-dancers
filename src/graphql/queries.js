@@ -4,9 +4,15 @@
 export const getDance = /* GraphQL */ `
   query GetDance($id: ID!) {
     getDance(id: $id) {
+      id
       code
+      pin
+      status
+      disableExplicitSongs
+      playlistId
+      musicProvider
       accessToken
-      requestToken
+      refreshToken
       tokenExpiresAt
       requests {
         items {
@@ -24,7 +30,6 @@ export const getDance = /* GraphQL */ `
         nextToken
         startedAt
       }
-      id
       createdAt
       updatedAt
       _version
@@ -41,15 +46,20 @@ export const listDances = /* GraphQL */ `
   ) {
     listDances(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         code
+        pin
+        status
+        disableExplicitSongs
+        playlistId
+        musicProvider
         accessToken
-        requestToken
+        refreshToken
         tokenExpiresAt
         requests {
           nextToken
           startedAt
         }
-        id
         createdAt
         updatedAt
         _version
@@ -75,15 +85,20 @@ export const syncDances = /* GraphQL */ `
       lastSync: $lastSync
     ) {
       items {
+        id
         code
+        pin
+        status
+        disableExplicitSongs
+        playlistId
+        musicProvider
         accessToken
-        requestToken
+        refreshToken
         tokenExpiresAt
         requests {
           nextToken
           startedAt
         }
-        id
         createdAt
         updatedAt
         _version
@@ -103,15 +118,20 @@ export const getRequest = /* GraphQL */ `
       upVoteCount
       downVoteCount
       dance {
+        id
         code
+        pin
+        status
+        disableExplicitSongs
+        playlistId
+        musicProvider
         accessToken
-        requestToken
+        refreshToken
         tokenExpiresAt
         requests {
           nextToken
           startedAt
         }
-        id
         createdAt
         updatedAt
         _version
@@ -140,11 +160,16 @@ export const listRequests = /* GraphQL */ `
         upVoteCount
         downVoteCount
         dance {
-          code
-          accessToken
-          requestToken
-          tokenExpiresAt
           id
+          code
+          pin
+          status
+          disableExplicitSongs
+          playlistId
+          musicProvider
+          accessToken
+          refreshToken
+          tokenExpiresAt
           createdAt
           updatedAt
           _version
@@ -182,11 +207,16 @@ export const syncRequests = /* GraphQL */ `
         upVoteCount
         downVoteCount
         dance {
-          code
-          accessToken
-          requestToken
-          tokenExpiresAt
           id
+          code
+          pin
+          status
+          disableExplicitSongs
+          playlistId
+          musicProvider
+          accessToken
+          refreshToken
+          tokenExpiresAt
           createdAt
           updatedAt
           _version
@@ -199,6 +229,47 @@ export const syncRequests = /* GraphQL */ `
         _deleted
         _lastChangedAt
         danceRequestsId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const danceByCode = /* GraphQL */ `
+  query DanceByCode(
+    $code: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelDanceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    danceByCode(
+      code: $code
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        code
+        pin
+        status
+        disableExplicitSongs
+        playlistId
+        musicProvider
+        accessToken
+        refreshToken
+        tokenExpiresAt
+        requests {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt

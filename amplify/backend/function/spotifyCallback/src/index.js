@@ -1,26 +1,12 @@
-/*
-Use the following code to retrieve configured secrets from SSM:
-
-const aws = require('aws-sdk');
-
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["SPOTIFY_CLIENT_SECRET"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
-Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
-*/
 const RequestUtils = require('/opt/RequestUtils')
 const aws = require('aws-sdk');
 
-const prepareResponse = (error, token) => {
+const prepareResponse = (error, querystring) => {
   let url = process.env.APP_URL
   if (error) {
     url += '/start?error=' + error
   } else {
-    url += '/setup?provider=spotify&token=' + token
+    url += '/setup' + querystring
   }
 
   console.log('redirect url', url)
@@ -86,13 +72,16 @@ exports.handler = async (event) => {
       }
     }, formData);
 
-    const access_token = response.body.access_token;
-    const expires_in = response.body.expires_in;
-    const refresh_token = response.body.refresh_token;
+    const qsData = {
+      access_token: response.body.access_token,
+      expires_in: response.body.expires_in,
+      refresh_token: response.body.refresh_token,
+    }
 
-    console.log({ access_token, expires_in, refresh_token });
+    console.log(data);
+    const qs = `?provider=spotify&${RequestUtils.urlEncode(qsData)}`
 
-    return prepareResponse();
+    return prepareResponse(null, qs);
 
   } catch (e) {
     console.error(e)

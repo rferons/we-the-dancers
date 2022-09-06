@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "wethedancers",
+  "AppSyncApiName": "weTheDancersGraphApi",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

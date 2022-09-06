@@ -4,9 +4,15 @@
 export const onCreateDance = /* GraphQL */ `
   subscription OnCreateDance {
     onCreateDance {
+      id
       code
+      pin
+      status
+      disableExplicitSongs
+      playlistId
+      musicProvider
       accessToken
-      requestToken
+      refreshToken
       tokenExpiresAt
       requests {
         items {
@@ -24,7 +30,6 @@ export const onCreateDance = /* GraphQL */ `
         nextToken
         startedAt
       }
-      id
       createdAt
       updatedAt
       _version
@@ -36,9 +41,15 @@ export const onCreateDance = /* GraphQL */ `
 export const onUpdateDance = /* GraphQL */ `
   subscription OnUpdateDance {
     onUpdateDance {
+      id
       code
+      pin
+      status
+      disableExplicitSongs
+      playlistId
+      musicProvider
       accessToken
-      requestToken
+      refreshToken
       tokenExpiresAt
       requests {
         items {
@@ -56,7 +67,6 @@ export const onUpdateDance = /* GraphQL */ `
         nextToken
         startedAt
       }
-      id
       createdAt
       updatedAt
       _version
@@ -68,9 +78,15 @@ export const onUpdateDance = /* GraphQL */ `
 export const onDeleteDance = /* GraphQL */ `
   subscription OnDeleteDance {
     onDeleteDance {
+      id
       code
+      pin
+      status
+      disableExplicitSongs
+      playlistId
+      musicProvider
       accessToken
-      requestToken
+      refreshToken
       tokenExpiresAt
       requests {
         items {
@@ -88,7 +104,6 @@ export const onDeleteDance = /* GraphQL */ `
         nextToken
         startedAt
       }
-      id
       createdAt
       updatedAt
       _version
@@ -105,15 +120,20 @@ export const onCreateRequest = /* GraphQL */ `
       upVoteCount
       downVoteCount
       dance {
+        id
         code
+        pin
+        status
+        disableExplicitSongs
+        playlistId
+        musicProvider
         accessToken
-        requestToken
+        refreshToken
         tokenExpiresAt
         requests {
           nextToken
           startedAt
         }
-        id
         createdAt
         updatedAt
         _version
@@ -137,15 +157,20 @@ export const onUpdateRequest = /* GraphQL */ `
       upVoteCount
       downVoteCount
       dance {
+        id
         code
+        pin
+        status
+        disableExplicitSongs
+        playlistId
+        musicProvider
         accessToken
-        requestToken
+        refreshToken
         tokenExpiresAt
         requests {
           nextToken
           startedAt
         }
-        id
         createdAt
         updatedAt
         _version
@@ -169,15 +194,20 @@ export const onDeleteRequest = /* GraphQL */ `
       upVoteCount
       downVoteCount
       dance {
+        id
         code
+        pin
+        status
+        disableExplicitSongs
+        playlistId
+        musicProvider
         accessToken
-        requestToken
+        refreshToken
         tokenExpiresAt
         requests {
           nextToken
           startedAt
         }
-        id
         createdAt
         updatedAt
         _version

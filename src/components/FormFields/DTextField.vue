@@ -1,8 +1,10 @@
 <template>
-  <input type="text"
-         v-bind="$attrs"
-         :value="modelValue"
-         @input="$emit('update:modelValue', $event.target.value)" />
+  <div class="input-container">
+    <input type="text"
+           v-bind="$attrs"
+           :value="modelValue"
+           @input="$emit('update:modelValue', $event.target.value)" />
+  </div>
 </template>
 
 <script>
@@ -13,7 +15,12 @@ export default {
 </script>
 
 <style scoped>
+.input-container {
+  display: flex;
+}
+
 input {
+  flex-grow: 1;
   border-radius: 4px;
   padding: 8px;
 }

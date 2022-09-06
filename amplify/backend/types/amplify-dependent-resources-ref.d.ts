@@ -1,14 +1,14 @@
 export type AmplifyDependentResourcesAttributes = {
     "api": {
-        "wethedancers": {
-            "GraphQLAPIKeyOutput": "string",
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        },
         "weTheDancersRestApi": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
+        },
+        "weTheDancersGraphApi": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     },
     "function": {

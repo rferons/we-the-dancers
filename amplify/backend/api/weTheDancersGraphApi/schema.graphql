@@ -1,10 +1,18 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+enum DanceStatus {
+  ACTIVE
+  INACTIVE
+}
 
 type Dance @model @auth(rules: [{ allow: public }]) {
-  code: ID!
+  id: ID!
+  code: ID! @index(name: "byCode", queryField: "danceByCode")
+  pin: String!
+  status: DanceStatus!
+  disableExplicitSongs: Boolean!
+  playlistId: String!
+  musicProvider: String!
   accessToken: String!
-  requestToken: String!
+  refreshToken: String!
   tokenExpiresAt: String!
   requests: [Request] @hasMany
 }

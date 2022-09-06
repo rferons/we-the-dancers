@@ -17,6 +17,43 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "pin": {
+                    "name": "pin",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "DanceStatus"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "disableExplicitSongs": {
+                    "name": "disableExplicitSongs",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "playlistId": {
+                    "name": "playlistId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "musicProvider": {
+                    "name": "musicProvider",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "accessToken": {
                     "name": "accessToken",
                     "isArray": false,
@@ -24,8 +61,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "requestToken": {
-                    "name": "requestToken",
+                "refreshToken": {
+                    "name": "refreshToken",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -75,6 +112,16 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCode",
+                        "queryField": "danceByCode",
+                        "fields": [
+                            "code"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -181,7 +228,15 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "DanceStatus": {
+            "name": "DanceStatus",
+            "values": [
+                "ACTIVE",
+                "INACTIVE"
+            ]
+        }
+    },
     "nonModels": {},
-    "version": "3d2120187a32539d81e7e40a08346445"
+    "version": "73c9a3b8c31d4d44e34ca022118b5129"
 };

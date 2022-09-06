@@ -20,11 +20,11 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Chakra Petch', sans-serif;
-  text-shadow: 3px 3px hotpink;
 }
 
 h1 {
   font-size: 48px;
+  text-shadow: 3px 3px hotpink;
 }
 
 a {

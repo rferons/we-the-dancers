@@ -1,6 +1,9 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-
+export enum DanceStatus {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE"
+}
 
 
 
@@ -15,8 +18,13 @@ type RequestMetaData = {
 export declare class Dance {
   readonly id: string;
   readonly code: string;
+  readonly pin: string;
+  readonly status: DanceStatus | keyof typeof DanceStatus;
+  readonly disableExplicitSongs: boolean;
+  readonly playlistId: string;
+  readonly musicProvider: string;
   readonly accessToken: string;
-  readonly requestToken: string;
+  readonly refreshToken: string;
   readonly tokenExpiresAt: string;
   readonly requests?: (Request | null)[] | null;
   readonly createdAt?: string | null;
