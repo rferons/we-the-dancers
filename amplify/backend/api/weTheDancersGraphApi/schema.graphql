@@ -8,8 +8,10 @@ type Dance @model @auth(rules: [{ allow: public }]) {
   code: ID! @index(name: "byCode", queryField: "danceByCode")
   pin: String!
   status: DanceStatus!
-  disableExplicitSongs: Boolean!
-  playlistId: String!
+  disableExplicitSongs: Boolean
+  showCurrentlyPlaying: Boolean
+  showSongsInPlaylist: Boolean
+  playlistId: String
   musicProvider: String!
   accessToken: String!
   refreshToken: String!

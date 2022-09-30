@@ -15,6 +15,7 @@ export default {
 <style>
 body {
   background-color: #333333;
+  color: white;
   font-size: 16px;
 }
 

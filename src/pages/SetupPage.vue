@@ -10,15 +10,18 @@
     <d-text-field v-model="sessionSettings.adminPin" placeholder="please not 1234" />
     <p style="text-align: left">This pin is used to change and manage session settings</p>
 
-    <h2>Select a Playlist</h2>
+    <h2>Additional Settings</h2>
+    <d-checkbox v-model="sessionSettings.disableExplicitSongs" label="disable explicit songs" />
+    <d-checkbox v-model="sessionSettings.showCurrentlyPlaying" label="show currently playing" />
+    <d-checkbox v-model="sessionSettings.showSongsInPlaylist" label="show next songs in playlist" />
+
+    <h2 v-if="sessionSettings.showSongsInPlaylist">Select a Playlist</h2>
     <d-autocomplete
+        v-if="sessionSettings.showSongsInPlaylist"
         v-model="sessionSettings.selectedPlaylist"
         :items="playlists"
         placeholder="select playlist"
         @input="search = $event" />
-
-    <h2>Additional Settings</h2>
-    <d-checkbox v-model="sessionSettings.disableExplicitSongs" label="disable explicit songs" />
 
     <d-button class="start-button" @click="letThePartyBegin">Start The Dance Already!</d-button>
   </div>
@@ -37,6 +40,8 @@ export default {
     search: null,
     sessionSettings: {
       adminPin: null,
+      showCurrentlyPlaying: true,
+      showSongsInPlaylist: true,
       disableExplicitSongs: true,
       selectedPlaylist: null
     },

@@ -6,7 +6,7 @@ exports.handler = async () => {
   const qs = new URLSearchParams();
   qs.append('response_type', 'code');
   qs.append('client_id', process.env.SPOTIFY_CLIENT_ID)
-  qs.append('scope', 'user-read-private user-read-email')
+  qs.append('scope', 'user-read-currently-playing user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-playback-state')
   qs.append('redirect_uri', process.env.SPOTIFY_REDIRECT_URI)
   qs.append('state', state)
 

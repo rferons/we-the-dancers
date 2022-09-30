@@ -4,11 +4,16 @@
         v-model="textInputValue"
         class="autocomplete-input"
         @focusin="inputFocused = true"
-        @blur="inputFocused = false" />
+        @blur="inputFocused = false"
+        :placeholder="placeholder"
+        @input="$emit('input', $event)"
+    />
 
     <ul v-show="showOptions" class="items-container">
       <li v-for="(item, index) in itemsFiltered" :key="index" class="autocomplete-item" @click="itemSelected(item)">
-        {{ item.name }}
+        <slot name="item" :item="item">
+          <div v-html="item.name"></div>
+        </slot>
       </li>
     </ul>
   </div>
@@ -20,14 +25,35 @@ export default {
   props: {
     modelValue: {
       type: Object,
-      required: true
+      required: false,
+      default: null
     },
     items: {
       type: Array,
       required: true
     },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    returnObject: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    itemValue: {
+      type: String,
+      required: false,
+      default: 'id'
+    },
+    itemName: {
+      type: [String,Function],
+      required: false,
+      default: 'name'
+    }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'input'],
   components: { DTextField },
   data: () => ({
     textInputValue: null,
@@ -53,9 +79,13 @@ export default {
   },
   methods: {
     itemSelected(item) {
-      console.log('item selected', item);
       this.value = item;
-      this.textInputValue = item.name
+
+      if (typeof this.itemName === 'function') {
+        this.textInputValue = this.itemName(item)
+      } else {
+        this.textInputValue = item[this.itemName]
+      }
     },
   },
   watch: {
@@ -79,6 +109,9 @@ export default {
   background-color: #fff;
   color: #000000;
   border-radius: 4px;
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .items-container li {

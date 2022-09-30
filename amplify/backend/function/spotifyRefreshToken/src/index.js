@@ -14,6 +14,10 @@ Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }
 */
 const RequestUtils = require('/opt/RequestUtils');
 const aws = require('aws-sdk');
+// Create service client module using ES6 syntax.
+import { DynamoDBClient, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+// Set the AWS Region.
+const REGION = "us-east-1"; //e.g. "us-east-1"
 
 exports.handler = async (event) => {
 
@@ -24,17 +28,13 @@ exports.handler = async (event) => {
     })
     .promise();
 
-  const danceCode = event.queryStringParameters.code;
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = SpotifyClientSecret.Value;
-
-  // get the refresh token from the database
-  const refresh_token = 'abc123';
 
   try {
 
     const data = {
-      refresh_token,
+      refresh_token: event.queryStringParameters.refreshToken,
       grant_type: 'refresh_token'
     }
 
@@ -49,18 +49,24 @@ exports.handler = async (event) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         //'Content-Length': Buffer.byteLength(formData),
-        'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
+        'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64')
       }
     }, formData);
 
     const access_token = response.body.access_token;
     const expires_in = response.body.expires_in;
-    const refresh_token = response.body.refresh_token;
-
-    console.log({ access_token, expires_in, refresh_token });
 
     return {
-      statusCode: 200
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Methods': 'GET OPTIONS',
+      },
+      body: JSON.stringify({
+        access_token,
+        expires_in
+      })
     }
   } catch (err) {
     return {

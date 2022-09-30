@@ -39,4 +39,8 @@ export default {
 .checkbox-container {
   display: flex;
 }
+
+input[type=checkbox] {
+  accent-color: hotpink;
+}
 </style>

@@ -3,13 +3,14 @@
     <input type="text"
            v-bind="$attrs"
            :value="modelValue"
+           :placeholder="placeholder"
            @input="$emit('update:modelValue', $event.target.value)" />
   </div>
 </template>
 
 <script>
 export default {
-  props: ['modelValue'],
+  props: ['modelValue', 'placeholder'],
   emits: ['update:modelValue']
 }
 </script>

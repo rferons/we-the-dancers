@@ -7,22 +7,25 @@ import { addSeconds } from "date-fns";
 const store = createStore({
   state() {
     return {
-      dance: {}
+      dance: {},
+      musicProvider: {},
     }
   },
   getters: {
     danceCode(state) {
       state.dance.code
-    }
+    },
   },
   mutations: {
     setDance(state, dance) {
       state.dance = dance;
+    },
+    setMusicProvider(state, provider) {
+      state.musicProvider= provider
     }
   },
   actions: {
-    async createNewDanceSession({ actions }, data) {
-      console.log({ actions });
+    async createNewDanceSession(context, data) {
       return DataStore.save(
         new Dance({
           code: StringUtils.random(),
@@ -37,6 +40,14 @@ const store = createStore({
         })
       )
     },
+    async createSongRequest({ state }, song) {
+      return DataStore.save(
+        new Request({
+          songId: song.id,
+          dance: state.dance
+        })
+      )
+    }
   },
 })
 

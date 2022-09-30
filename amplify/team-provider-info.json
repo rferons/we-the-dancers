@@ -23,14 +23,14 @@
         },
         "spotifyLogin": {
           "deploymentBucketName": "amplify-wethedancers-dev-215924-deployment",
-          "s3Key": "amplify-builds/spotifyLogin-526a5077494c444d704e-build.zip",
+          "s3Key": "amplify-builds/spotifyLogin-426d574b394f4b6e774a-build.zip",
           "spotifyClientId": "2a33822471df48c1b5939db7f56ea58b",
           "spotifyRedirectUri": "http://localhost:3000/spotify/callback",
           "secretsPathAmplifyAppId": "d3pkd01z38gpom"
         },
         "spotifyRefreshToken": {
           "deploymentBucketName": "amplify-wethedancers-dev-215924-deployment",
-          "s3Key": "amplify-builds/spotifyRefreshToken-314a4b3072684456694f-build.zip",
+          "s3Key": "amplify-builds/spotifyRefreshToken-6550504a682b53656174-build.zip",
           "spotifyClientId": "2a33822471df48c1b5939db7f56ea58b",
           "spotifyRedirectUri": "https://7ny3hwze4m.execute-api.us-east-1.amazonaws.com/dev/spotify/callback",
           "secretsPathAmplifyAppId": "d3pkd01z38gpom"
